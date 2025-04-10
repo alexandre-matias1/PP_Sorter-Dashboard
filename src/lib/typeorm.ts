@@ -1,15 +1,17 @@
 // lib/typeorm.ts
 import { DataSource } from 'typeorm';
-import { logs_v2 } from '../../logs'; // Sua entidade
+import { Logs } from '../../logs';
+import path from 'path';
+const dbPath = path.join(process.cwd(), 'database.db');
 
-const dbPath = '../../../db/'
+
 
 const AppDataSource = new DataSource({
   type: 'sqlite',
-  database: dbPath, // Caminho para o arquivo do banco SQLite
-  synchronize: false,  // Sincroniza o banco de dados com as entidades
-  logging: true,      // Habilita logs para ver o SQL gerado
-  entities: [logs_v2],   // Liste suas entidades aqui
+  database: dbPath,
+  synchronize: false,
+  logging: true,
+  entities: [Logs],
   migrations: [],
   subscribers: [],
 });

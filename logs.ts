@@ -1,16 +1,19 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
-@Entity()
-export class logs_v2 {
+@Entity() 
+export class Logs {
   @PrimaryGeneratedColumn()
+  ID!: number;
+
+  @Column('text')
   Data!: string;
 
-  @Column()
+  @Column('text')
   Mensagem!: string;
 
-  @Column()
+  @Column('text')
   Tipo!: string;
 
-  @Column()
+  @Column('text')
   DateFormat!: string;
 }
