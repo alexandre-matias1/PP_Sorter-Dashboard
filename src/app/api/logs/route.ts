@@ -94,11 +94,6 @@ export async function POST(req: NextRequest) {
         rejeito: found?.rejeito ?? 0,
       };
     });
-
-    console.log(
-      "Dados enviados pro front",
-      JSON.stringify(logs, null, 2)
-    );
     return NextResponse.json(mergedLogs);
   } catch (error) {
     return NextResponse.json({

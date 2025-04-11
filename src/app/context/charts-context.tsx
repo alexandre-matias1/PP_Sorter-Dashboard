@@ -31,7 +31,6 @@ export function ChartsProvider({ children }: ChartsProviderProps) {
         startDate: start,
         endDate: end,
       });
-      console.log("📦 Dados recebidos no client:", response.data);
       setCharts(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
         console.error("Erro ao buscar os dados", error);
