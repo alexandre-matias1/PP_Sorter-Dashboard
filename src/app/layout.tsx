@@ -1,5 +1,6 @@
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import "../styles/globals.css";
+import { ChartsProvider } from "./context/charts-context";
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -8,14 +9,16 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        <ChartsProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </ChartsProvider>
       </body>
     </html>
   );

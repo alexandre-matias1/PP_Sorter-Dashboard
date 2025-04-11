@@ -16,48 +16,12 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Checkbox } from "./ui/checkbox";
 import { CheckedState } from "@radix-ui/react-checkbox";
 import { Button } from "./ui/button";
-const chartData = [
-  { month: "January", ind: 1860, recirc: 800, rejeito: 11 },
-  { month: "February", ind: 3050, recirc: 200, rejeito: 22 },
-  { month: "March", ind: 2370, recirc: 1200, rejeito: 100 },
-  { month: "April", ind: 730, recirc: 190, rejeito: 23 },
-  { month: "May", ind: 2090, recirc: 130, rejeito: 45 },
-  { month: "June", ind: 2140, recirc: 140, rejeito: 10 },
-  { month: "January", ind: 1860, recirc: 800, rejeito: 11 },
-  { month: "February", ind: 3050, recirc: 200, rejeito: 22 },
-  { month: "March", ind: 2370, recirc: 1200, rejeito: 100 },
-  { month: "April", ind: 730, recirc: 190, rejeito: 23 },
-  { month: "May", ind: 2090, recirc: 130, rejeito: 45 },
-  { month: "June", ind: 2140, recirc: 140, rejeito: 10 },
-  { month: "January", ind: 1860, recirc: 800, rejeito: 11 },
-  { month: "February", ind: 3050, recirc: 200, rejeito: 22 },
-  { month: "March", ind: 2370, recirc: 1200, rejeito: 100 },
-  { month: "April", ind: 730, recirc: 190, rejeito: 23 },
-  { month: "May", ind: 2090, recirc: 130, rejeito: 45 },
-  { month: "June", ind: 2140, recirc: 140, rejeito: 10 },
-  { month: "January", ind: 1860, recirc: 800, rejeito: 11 },
-  { month: "February", ind: 3050, recirc: 200, rejeito: 22 },
-  { month: "March", ind: 2370, recirc: 1200, rejeito: 100 },
-  { month: "April", ind: 730, recirc: 190, rejeito: 23 },
-  { month: "May", ind: 2090, recirc: 130, rejeito: 45 },
-  { month: "June", ind: 2140, recirc: 140, rejeito: 10 },
-  { month: "January", ind: 1860, recirc: 800, rejeito: 11 },
-  { month: "February", ind: 3050, recirc: 200, rejeito: 22 },
-  { month: "March", ind: 2370, recirc: 1200, rejeito: 100 },
-  { month: "April", ind: 730, recirc: 190, rejeito: 23 },
-  { month: "May", ind: 2090, recirc: 130, rejeito: 45 },
-  { month: "June", ind: 2140, recirc: 140, rejeito: 10 },
-  { month: "January", ind: 1860, recirc: 800, rejeito: 11 },
-  { month: "February", ind: 3050, recirc: 200, rejeito: 22 },
-  { month: "March", ind: 2370, recirc: 1200, rejeito: 100 },
-  { month: "April", ind: 730, recirc: 190, rejeito: 23 },
-  { month: "May", ind: 2090, recirc: 130, rejeito: 45 },
-  { month: "June", ind: 2140, recirc: 140, rejeito: 10 },
-];
+import { ChartsContext } from "@/app/context/charts-context";
+
 
 const chartConfig = {
   ind: {
@@ -75,7 +39,10 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function ChartsView() {
-  const [viewChart, setViewChart] = useState(["ind"]);
+  const { chartsData } = useContext(ChartsContext);
+  const [viewChart, setViewChart] = useState(["inducao"]);
+  console.log(chartsData)
+
 
   const handleCheckboxChange = (value: string, checked: CheckedState) => {
     setViewChart((state) => {
@@ -107,9 +74,9 @@ export function ChartsView() {
               <div className="flex items-center justify-start gap-3">
                 <Checkbox
                   id="Ind"
-                  checked={viewChart.includes("ind")}
+                  checked={viewChart.includes("inducao")}
                   onCheckedChange={(checked) =>
-                    handleCheckboxChange("ind", checked)
+                    handleCheckboxChange("inducao", checked)
                   }
                 />
                 <label htmlFor="ind">Indução</label>
@@ -117,9 +84,9 @@ export function ChartsView() {
               <div className="flex items-center justify-start gap-3">
                 <Checkbox
                   id="Recirc"
-                  checked={viewChart.includes("recirc")}
+                  checked={viewChart.includes("recirculacao")}
                   onCheckedChange={(checked) =>
-                    handleCheckboxChange("recirc", checked)
+                    handleCheckboxChange("recirculacao", checked)
                   }
                 />
                 <label htmlFor="rec">Recirculação</label>
@@ -141,7 +108,7 @@ export function ChartsView() {
           <ChartContainer className="w-[1350px] h-[600px]" config={chartConfig}>
             <AreaChart
               accessibilityLayer
-              data={chartData}
+              data={chartsData}
               margin={{
                 left: 12,
                 right: 12,
@@ -149,18 +116,18 @@ export function ChartsView() {
             >
               <CartesianGrid vertical={false} />
               <XAxis
-                dataKey="month"
+                dataKey="hour"
                 tickLine={false}
                 axisLine={false}
                 tickMargin={8}
-                tickFormatter={(value) => value.slice(0, 3)}
+                tickFormatter={(value) => value.slice(5, 16)}
               />
               <ChartTooltip
                 cursor={false}
                 content={<ChartTooltipContent indicator="dot" />}
               />
               <Area
-                dataKey={viewChart.includes("ind") ? "ind" : ""}
+                dataKey={viewChart.includes("inducao") ? "inducao" : ""}
                 type="monotone"
                 fill="var(--color-ind)"
                 fillOpacity={0.4}
@@ -168,7 +135,7 @@ export function ChartsView() {
                 stackId="a"
               />
               <Area
-                dataKey={viewChart.includes("recirc") ? "recirc" : ""}
+                dataKey={viewChart.includes("recirculacao") ? "recirculacao" : ""}
                 type="monotone"
                 fill="var(--color-recirc)"
                 fillOpacity={0.4}

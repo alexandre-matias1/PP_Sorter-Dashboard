@@ -9,7 +9,7 @@ interface LogEntry {
   rejeito: number;
 }
 
-interface RequestBody {
+export interface RequestBody {
   startDate: string;
   endDate: string;
 }
@@ -18,6 +18,8 @@ export async function POST(req: NextRequest) {
   try {
     const body: RequestBody = await req.json();
     const { startDate, endDate } = body;
+
+    console.log(startDate, endDate);
 
     if (!startDate || !endDate) {
       return NextResponse.json({
@@ -30,7 +32,7 @@ export async function POST(req: NextRequest) {
         error: "A data inicial é superior a data final",
       });
     }
-    const dateLimit = 7
+    const dateLimit = 7;
     const limitDate = subDays(new Date(endDate), dateLimit);
 
     if (new Date(startDate) < limitDate) {
@@ -93,6 +95,10 @@ export async function POST(req: NextRequest) {
       };
     });
 
+    console.log(
+      "Dados enviados pro front",
+      JSON.stringify(logs, null, 2)
+    );
     return NextResponse.json(mergedLogs);
   } catch (error) {
     return NextResponse.json({

@@ -11,6 +11,8 @@ import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { Calendar } from "../ui/calendar";
 import { TimePicker } from "./time-picker";
+import { ChartsContext } from "@/app/context/charts-context";
+import { useContext } from "react";
 
 const formSchema = z.object({
   startDate: z.date(),
@@ -18,7 +20,9 @@ const formSchema = z.object({
 });
 type FormSchemaType = z.infer<typeof formSchema>;
 
+
 export default function DateTimePickerForm() {
+  const { fetchRequest } = useContext(ChartsContext);
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
   });
@@ -26,8 +30,8 @@ export default function DateTimePickerForm() {
   function onSubmit(values: FormSchemaType) {
     const start = format(values.startDate, "yyyy-MM-dd HH:mm:ss");
     const end = format(values.endDate, "yyyy-MM-dd HH:mm:ss");
-    console.log(start, end)
-    // fetchRequestInd(start, end);
+    fetchRequest(start, end)
+    form.reset()
   }
 
   return (

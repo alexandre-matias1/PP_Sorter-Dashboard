@@ -9,10 +9,10 @@ export default function Home() {
       <Header />
       <div className="flex flex-col mt-16">
         <div className="flex gap-10 items-center justify-center">
-        <div className=" flex flex-col items-start gap-10 pl-49">
-          <DateTimePickerForm />
-          <ChartsView />
-        </div>
+          <div className=" flex flex-col items-start gap-10 pl-49">
+            <DateTimePickerForm />
+            <ChartsView />
+          </div>
           <Cards />
         </div>
       </div>
