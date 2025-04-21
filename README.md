@@ -1,4 +1,4 @@
-# Sorter Dashboard
+# 📈 Sorter Dashboard
 
 Sorter Dashboard é uma aplicação desenvolvida para visualização de dados operacionais. O sistema permite monitorar em tempo real as induções, rejeitos e recirculações, oferecendo uma interface clara e intuitiva para acompanhamento do desempenho.
 
@@ -16,14 +16,15 @@ Sorter Dashboard é uma aplicação desenvolvida para visualização de dados op
 ```bash
 git clone https://github.com/alexandre-matias1/PP_Sorter-Dashboard.git
 cd PP_Sorter-Dashboard
+```
 
-2. Instale as dependências:
+### 2. Instale as dependências:
 
    ```bash
    npm install
    ```
 
-3. Inicie o servidor de desenvolvimento:
+### 3. Inicie o servidor de desenvolvimento:
 
    ```bash
    npm run dev
