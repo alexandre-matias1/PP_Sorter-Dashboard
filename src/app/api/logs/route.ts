@@ -19,8 +19,6 @@ export async function POST(req: NextRequest) {
     const body: RequestBody = await req.json();
     const { startDate, endDate } = body;
 
-    console.log(startDate, endDate);
-
     if (!startDate || !endDate) {
       return NextResponse.json({
         error: "Date not found",
