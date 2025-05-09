@@ -1,6 +1,6 @@
 "use client";
 
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
+import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 
 import {
@@ -41,7 +41,6 @@ const chartConfig = {
 export function ChartsView() {
   const { chartsData } = useContext(ChartsContext);
   const [viewChart, setViewChart] = useState(["inducao"]);
-  console.log(chartsData)
 
 
   const handleCheckboxChange = (value: string, checked: CheckedState) => {
@@ -53,6 +52,7 @@ export function ChartsView() {
       }
     });
   };
+
 
   return (
     <div>
@@ -105,7 +105,7 @@ export function ChartsView() {
           </Popover>
         </CardHeader>
         <CardContent>
-          <ChartContainer className="w-[1350px] h-[600px]" config={chartConfig}>
+          <ChartContainer className="w-[1180px] h-[580px]" config={chartConfig}>
             <AreaChart
               accessibilityLayer
               data={chartsData}
@@ -121,6 +121,9 @@ export function ChartsView() {
                 axisLine={false}
                 tickMargin={8}
                 tickFormatter={(value) => value.slice(5, 16)}
+              />
+              <YAxis
+            
               />
               <ChartTooltip
                 cursor={false}

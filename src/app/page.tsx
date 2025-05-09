@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <div className="flex flex-col mt-16">
+      <div className="flex flex-col mt-12">
         <div className="flex gap-10 items-center justify-center">
           <div className=" flex flex-col items-start gap-10 pl-49">
             <DateTimePickerForm />
